@@ -11,7 +11,9 @@ const MenuCard = ({ item }) => (
     <p>
       <strong>ETA:</strong> {item.etaMinutes} minutes
     </p>
+
     <p className="muted">{item.active ? "Active" : "Inactive"}</p>
+
   </div>
 );
 
@@ -29,7 +31,9 @@ const ConfirmationCard = ({ item }) => (
 );
 
 const App = () => {
+
   const [activePage, setActivePage] = useState("login");
+
   const [status, setStatus] = useState("Not signed in");
   const [token, setToken] = useState("");
   const [role, setRole] = useState("");
@@ -37,6 +41,7 @@ const App = () => {
   const [menuError, setMenuError] = useState("");
   const [confirmations, setConfirmations] = useState([]);
   const [confirmationsError, setConfirmationsError] = useState("");
+
   const [adminItems, setAdminItems] = useState([]);
   const [adminItemsError, setAdminItemsError] = useState("");
 
@@ -46,11 +51,16 @@ const App = () => {
     email: "",
     password: ""
   });
+
+
+  const [loginForm, setLoginForm] = useState({ email: "", password: "" });
+
   const [confirmForm, setConfirmForm] = useState({
     orderId: "",
     customerName: "",
     address: ""
   });
+
   const [adminForm, setAdminForm] = useState({
     id: "",
     name: "",
@@ -58,6 +68,7 @@ const App = () => {
     etaMinutes: "",
     active: true
   });
+
 
   const isAdmin = useMemo(() => role === "admin", [role]);
 
@@ -93,6 +104,7 @@ const App = () => {
     }
   };
 
+
   const fetchAdminItems = async () => {
     if (!token || !isAdmin) {
       return;
@@ -114,6 +126,7 @@ const App = () => {
     }
   };
 
+
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -132,13 +145,18 @@ const App = () => {
       setToken(data.token);
       setRole(data.user.role);
       setStatus(`Signed in as ${data.user.name} (${data.user.role})`);
+
       setActivePage("dashboard");
       fetchConfirmations();
       fetchAdminItems();
+
+      fetchConfirmations();
+
     } catch (error) {
       setStatus("Login failed. Check credentials.");
     }
   };
+
 
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
@@ -161,6 +179,7 @@ const App = () => {
       setStatus("Registration failed. Try again.");
     }
   };
+
 
   const handleConfirmSubmit = async (event) => {
     event.preventDefault();
@@ -191,6 +210,7 @@ const App = () => {
       setStatus("Delivery confirmation failed.");
     }
   };
+
 
   const handleAdminItemSubmit = async (event) => {
     event.preventDefault();
@@ -250,15 +270,18 @@ const App = () => {
     });
   };
 
+
   useEffect(() => {
     fetchMenu();
   }, []);
+
 
   useEffect(() => {
     if (isAdmin) {
       fetchAdminItems();
     }
   }, [isAdmin]);
+
 
   return (
     <div className="page">
@@ -273,6 +296,7 @@ const App = () => {
         </div>
         <StatusBadge text={status} />
       </header>
+
 
       <nav className="nav">
         <button
@@ -588,6 +612,140 @@ const App = () => {
           </section>
         </main>
       )}
+
+      <main className="grid">
+        <section className="card">
+          <h2>Login</h2>
+          <form onSubmit={handleLoginSubmit}>
+            <label>
+              Email
+              <input
+                type="email"
+                name="email"
+                placeholder="delivery@company.lk"
+                value={loginForm.email}
+                onChange={(event) =>
+                  setLoginForm((prev) => ({
+                    ...prev,
+                    email: event.target.value
+                  }))
+                }
+                required
+              />
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                value={loginForm.password}
+                onChange={(event) =>
+                  setLoginForm((prev) => ({
+                    ...prev,
+                    password: event.target.value
+                  }))
+                }
+                required
+              />
+            </label>
+            <button type="submit">Sign in</button>
+            <p className="helper">Use the delivery admin or delivery staff account.</p>
+          </form>
+        </section>
+
+        <section className="card">
+          <h2>Delivery Menu</h2>
+          <div className="menu">
+            {menuError && <p className="muted">{menuError}</p>}
+            {!menuError && menuItems.length === 0 && (
+              <p className="muted">No delivery items found.</p>
+            )}
+            {menuItems.map((item) => (
+              <MenuCard key={item._id || item.name} item={item} />
+            ))}
+          </div>
+          <button className="secondary" type="button" onClick={fetchMenu}>
+            Refresh Menu
+          </button>
+        </section>
+
+        <section className="card">
+          <h2>Confirm Delivery</h2>
+          <form onSubmit={handleConfirmSubmit}>
+            <label>
+              Order ID
+              <input
+                type="text"
+                name="orderId"
+                placeholder="ORD-1007"
+                value={confirmForm.orderId}
+                onChange={(event) =>
+                  setConfirmForm((prev) => ({
+                    ...prev,
+                    orderId: event.target.value
+                  }))
+                }
+                required
+              />
+            </label>
+            <label>
+              Customer Name
+              <input
+                type="text"
+                name="customerName"
+                placeholder="Saman"
+                value={confirmForm.customerName}
+                onChange={(event) =>
+                  setConfirmForm((prev) => ({
+                    ...prev,
+                    customerName: event.target.value
+                  }))
+                }
+                required
+              />
+            </label>
+            <label>
+              Address
+              <textarea
+                name="address"
+                rows="3"
+                placeholder="123, Main Road, Colombo"
+                value={confirmForm.address}
+                onChange={(event) =>
+                  setConfirmForm((prev) => ({
+                    ...prev,
+                    address: event.target.value
+                  }))
+                }
+                required
+              />
+            </label>
+            <button type="submit">Confirm Delivery</button>
+          </form>
+        </section>
+
+        <section className={`card ${isAdmin ? "" : "hidden"}`}>
+          <h2>Admin Confirmations</h2>
+          <div className="confirmations">
+            {confirmationsError && <p className="muted">{confirmationsError}</p>}
+            {!confirmationsError && confirmations.length === 0 && (
+              <p className="muted">No confirmations yet.</p>
+            )}
+            {confirmations.map((item) => (
+              <ConfirmationCard key={item._id} item={item} />
+            ))}
+          </div>
+          <button
+            className="secondary"
+            type="button"
+            onClick={fetchConfirmations}
+          >
+            Refresh Confirmations
+          </button>
+        </section>
+      </main>
+
     </div>
   );
 };

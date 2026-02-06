@@ -1,6 +1,8 @@
 const express = require("express");
 const DeliveryConfirmation = require("../models/DeliveryConfirmation");
+
 const DeliveryItem = require("../models/DeliveryItem");
+
 const { authenticate, authorizeRole } = require("../middleware/auth");
 
 const router = express.Router();
@@ -11,6 +13,7 @@ router.get("/confirmations", authenticate, authorizeRole("admin"), async (_req, 
     .sort({ deliveredAt: -1 });
   return res.json(confirmations);
 });
+
 
 router.get("/items", authenticate, authorizeRole("admin"), async (_req, res) => {
   const items = await DeliveryItem.find().sort({ createdAt: -1 });
@@ -60,5 +63,6 @@ router.put("/items/:id", authenticate, authorizeRole("admin"), async (req, res) 
     return res.status(500).json({ message: "Failed to update delivery item" });
   }
 });
+
 
 module.exports = router;
