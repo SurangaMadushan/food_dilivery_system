@@ -1,7 +1,9 @@
 :root {
   color-scheme: light;
   font-family: "Inter", system-ui, sans-serif;
+
   background: #f5f6fb;
+
   color: #1f2937;
 }
 
@@ -11,6 +13,10 @@
 
 body {
   margin: 0;
+
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff6b35, #ff9f1c, #fff1eb);
+
 }
 
 .page {
@@ -20,7 +26,9 @@ body {
 }
 
 .hero {
+
   background: linear-gradient(120deg, #2f4cdd, #5c7cfa);
+
   color: white;
   padding: 32px;
   border-radius: 20px;
@@ -58,6 +66,30 @@ body {
   margin-top: 24px;
 }
 
+
+.nav {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-button {
+  background: #fff5f0;
+  color: #b31217;
+  border: 1px solid rgba(179, 18, 23, 0.2);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-button.active {
+  background: #b31217;
+  color: #ffffff;
+}
+
+
 .card {
   background: #ffffff;
   border-radius: 16px;
@@ -85,7 +117,9 @@ textarea {
 }
 
 button {
+
   background: #2f4cdd;
+
   color: white;
   border: none;
   padding: 10px 14px;
@@ -95,8 +129,11 @@ button {
 }
 
 button.secondary {
-  background: #eef2ff;
-  color: #2f4cdd;
+
+  background: #fff0e6;
+  color: #b31217;
+
+ 
 }
 
 .menu,
@@ -126,4 +163,32 @@ button.secondary {
   margin: 0;
   font-size: 12px;
   color: #6b7280;
+}
+
+
+.checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-list {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #f3d1c7;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fffaf7;
+}
+
+.admin-title {
+  margin: 0;
+  font-weight: 600;
 }

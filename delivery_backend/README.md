@@ -31,8 +31,8 @@ npm run dev
 ```
 
 
-The API will run on `http://localhost:8081` by default.
 
+The API will run on `http://localhost:8081` by default.
 
 ## API Endpoints
 
@@ -41,3 +41,8 @@ The API will run on `http://localhost:8081` by default.
 - `GET /api/deliveries/menu` (public delivery menu)
 - `POST /api/deliveries/confirm` (delivery staff confirms delivery)
 - `GET /api/admin/confirmations` (admin views confirmations)
+
+- `GET /api/admin/items` (admin list all delivery items)
+- `POST /api/admin/items` (admin create delivery item)
+- `PUT /api/admin/items/:id` (admin update delivery item)
+
