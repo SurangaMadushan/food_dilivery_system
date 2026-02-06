@@ -1,21 +1,29 @@
-# Delivery Frontend
 
-Simple UI for the delivery team. Includes dedicated login, delivery menu, and delivery confirmation. Admins can view confirmations.
+# Delivery Frontend (React)
+
+React-based UI for the delivery team. Includes dedicated login, delivery menu, and delivery confirmation. Admins can view confirmations.
+
+## Setup
+
+1. Ensure the delivery backend is running on `http://localhost:8081`.
+2. Install dependencies:
+
+```bash
+npm install
+```
 
 ## Run in VS Code
 
-1. Ensure the delivery backend is running on `http://localhost:5050`.
-2. Open this folder in VS Code.
-3. Use one of the following options:
-
-### Option A: Live Server extension
-- Install the **Live Server** VS Code extension.
-- Right-click `index.html` and choose **Open with Live Server**.
-
-### Option B: Simple HTTP server
-
 ```bash
-python -m http.server 5173
+npm run dev
 ```
 
 Then open `http://localhost:5173` in your browser.
+
+## Environment
+
+To point the UI to a different API host, create a `.env` file with:
+
+```bash
+VITE_API_BASE=http://localhost:8081
+```

@@ -4,71 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Delivery Portal</title>
-    <link rel="stylesheet" href="styles.css" />
+
   </head>
   <body>
-    <div class="page">
-      <header class="hero">
-        <div>
-          <p class="eyebrow">Delivery Unit</p>
-          <h1>Delivery Portal</h1>
-          <p class="subtitle">
-            Dedicated login, delivery menu, and confirmation workflow for the delivery team.
-          </p>
-        </div>
-        <div class="status" id="status">Not signed in</div>
-      </header>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
 
-      <main class="grid">
-        <section class="card">
-          <h2>Login</h2>
-          <form id="login-form">
-            <label>
-              Email
-              <input type="email" name="email" placeholder="delivery@company.lk" required />
-            </label>
-            <label>
-              Password
-              <input type="password" name="password" placeholder="••••••••" required />
-            </label>
-            <button type="submit">Sign in</button>
-            <p class="helper">Use the delivery admin or delivery staff account.</p>
-          </form>
-        </section>
-
-        <section class="card">
-          <h2>Delivery Menu</h2>
-          <div id="menu" class="menu"></div>
-          <button id="refresh-menu" class="secondary">Refresh Menu</button>
-        </section>
-
-        <section class="card">
-          <h2>Confirm Delivery</h2>
-          <form id="confirm-form">
-            <label>
-              Order ID
-              <input type="text" name="orderId" placeholder="ORD-1007" required />
-            </label>
-            <label>
-              Customer Name
-              <input type="text" name="customerName" placeholder="Saman" required />
-            </label>
-            <label>
-              Address
-              <textarea name="address" rows="3" placeholder="123, Main Road, Colombo" required></textarea>
-            </label>
-            <button type="submit">Confirm Delivery</button>
-          </form>
-        </section>
-
-        <section class="card" id="admin-panel">
-          <h2>Admin Confirmations</h2>
-          <div id="confirmations" class="confirmations"></div>
-          <button id="refresh-confirmations" class="secondary">Refresh Confirmations</button>
-        </section>
-      </main>
-    </div>
-
-    <script src="app.js"></script>
   </body>
 </html>
