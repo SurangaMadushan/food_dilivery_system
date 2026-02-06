@@ -30,7 +30,9 @@ npm run seed:admin
 npm run dev
 ```
 
+
 The API will run on `http://localhost:8081` by default.
+
 
 ## API Endpoints
 
